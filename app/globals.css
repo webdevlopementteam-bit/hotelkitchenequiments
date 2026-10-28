@@ -1,26 +1,119 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-lato: var(--font-lato), sans-serif;
+  --font-open-sans: var(--font-open-sans), sans-serif;
+  --font-nunito: var(--font-nunito-sans), sans-serif;
+
+  /* Blocksy palette used by the original theme */
+  --color-palette-1: #2872fa;
+  --color-palette-2: #1559ed;
+  --color-palette-3: #3a4f66;
+  --color-palette-4: #192a3d;
+  --color-palette-5: #e1e8ed;
+  --color-palette-7: #fafbfc;
+  --color-brand: #2f3192;
+  --color-brand-blue: #0004b7;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-palette-7);
+    color: var(--color-palette-3);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-palette-4);
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  h1 { font-size: 40px; }
+  h2 { font-size: 35px; }
+  h3 { font-size: 30px; }
+  h4 { font-size: 25px; }
+  h5 { font-size: 20px; }
+  h6 { font-size: 16px; }
+
+  a {
+    transition: color 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+
+  ::selection {
+    background: var(--color-palette-1);
+    color: #fff;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Long-form SEO copy on the home page (Elementor text-editor widget). */
+.seo-content > * + * {
+  margin-top: 1.5em;
+}
+.seo-content h2 {
+  font-size: 35px;
+}
+.seo-content h4 {
+  font-size: 25px;
+}
+.seo-content a {
+  color: var(--color-palette-1);
+}
+.seo-content a:hover {
+  color: var(--color-palette-2);
+}
+.seo-content ul {
+  list-style: disc;
+  padding-inline-start: 2.5em;
+}
+.seo-content strong {
+  font-weight: 700;
+}
+
+/* Swiper bullets, matching Element Pack defaults. */
+.hero-slider .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  opacity: 0.5;
+}
+.hero-slider .swiper-pagination-bullet-active {
+  opacity: 1;
+}
+.about-slider .swiper-pagination-bullet {
+  width: 50px;
+  height: 5px;
+  border-radius: 10px;
+  background: #212b49;
+  opacity: 0.4;
+  transition: all 0.3s;
+}
+.about-slider .swiper-pagination-bullet-active {
+  height: 10px;
+  opacity: 1;
+}
+
+/* Animated stroke divider under section headings. */
+@keyframes stroke-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.divider-line {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: stroke-draw 1.2s ease-out both;
 }
